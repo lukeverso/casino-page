@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Cassino</title>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;700&display=swap" rel="stylesheet">
+
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+	const slidesContainer = document.querySelector('.slides-container');
+	const prevButton = document.querySelector('.prev');
+	const nextButton = document.querySelector('.next');
+
+	// Função para rolar para a esquerda
+	function scrollLeft() {
+		slidesContainer.scrollBy({
+		left: -200, // Ajuste o valor conforme necessário
+		behavior: 'smooth'
+		});
+	}
+
+	// Função para rolar para a direita
+	function scrollRight() {
+		slidesContainer.scrollBy({
+		left: 200, // Ajuste o valor conforme necessário
+		behavior: 'smooth'
+		});
+	}
+
+	// Adiciona os ouvintes de eventos aos botões
+	prevButton.addEventListener('click', scrollLeft);
+	nextButton.addEventListener('click', scrollRight);
+	});
+</script>
+
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Source Sans 3', sans-serif;
+}
+.slides-container {
+-ms-overflow-style: none; /* Internet Explorer 10+ */
+scrollbar-width: none; /* Firefox */
+}
+.slides-container::-webkit-scrollbar {
+	display: none; /* Safari and Chrome */
+}
+.slide {
+	width: 20%;
+}
+</style>
+</head>
+
+<body class="bg-[#232931] w-full h-screen flex text-white">
+	<aside id="sidebar" class="w-[250px] h-full bg-[#2A313B] flex flex-col justify-between fixed">
+		<div class="px-10 pt-10">
+			<img src="./logo.svg" alt="" />
+		</div>
+		<ul class="flex flex-col gap-3">
+			<li class="px-10">
+				<span class="hover:text-[#FFDF3B] cursor-pointer">
+					Jogos
+				</span>
+			</li>
+			<li class="px-10">
+				<span class="hover:text-[#FFDF3B] cursor-pointer">
+					Todos os jogos
+				</span>
+			</li>
+			<li class="flex flex-col gap-3">
+				<span class="px-10">Categorias</span>
+				<ul class="flex flex-col">
+					<li
+						class="flex items-center gap-2 hover:bg-gray-500 cursor-pointer hover:text-[#FFDF3B] px-10 py-2">
+						<i data-lucide="swords" class="text-sm"></i>
+						<span>Ação</span>
+					</li>
+					<li
+						class="flex items-center gap-2 hover:bg-gray-500 cursor-pointer hover:text-[#FFDF3B] px-10 py-2">
+						<i data-lucide="rocket" class="text-sm"></i>
+						<span>Aventura</span>
+					</li>
+					<li
+						class="flex items-center gap-2 hover:bg-gray-500 cursor-pointer hover:text-[#FFDF3B] px-10 py-2">
+						<i data-lucide="puzzle" class="text-sm"></i>
+						<span>Casual</span>
+					</li>
+					<li
+						class="flex items-center gap-2 hover:bg-gray-500 cursor-pointer hover:text-[#FFDF3B] px-10 py-2">
+						<i data-lucide="dices" class="text-sm"></i>
+						<span>Estratégia</span>
+					</li>
+					<li
+						class="flex items-center gap-2 hover:bg-gray-500 cursor-pointer hover:text-[#FFDF3B] px-10 py-2">
+						<i data-lucide="boxes" class="text-sm"></i>
+						<span>Intelectual</span>
+					</li>
+					<li
+						class="flex items-center gap-2 hover:bg-gray-500 cursor-pointer hover:text-[#FFDF3B] px-10 py-2">
+						<i data-lucide="target" class="text-sm"></i>
+						<span>Esporte</span>
+					</li>
+				</ul>
+			</li>
+			<li class="px-10">
+				<span class="hover:text-[#FFDF3B] cursor-pointer">
+					Recomendados
+				</span>
+			</li>
+			<li class="px-10">
+				<span class="hover:text-[#FFDF3B] cursor-pointer">
+					Novos!
+				</span>
+			</li>
+			<li class="px-10">
+				<span class="hover:text-[#FFDF3B] cursor-pointer">
+					Mais jogados
+				</span>
+			</li>
+		</ul>
+		<div class="px-10 pb-10">
+			<a href="#"
+				class="w-full flex justify-center items-center py-1 px-3 text-black bg-[#FFDF3B] uppercase font-bold rounded hover:bg-[#DDBA08]">
+				Indique e ganhe
+			</a>
+		</div>
+	</aside>
+	<main id="main-area" class="ml-[250px]">
+		<div class="p-10 mx-auto flex flex-col gap-10 w-full">
+			<header class="flex justify-between">
+				<div class="flex items-center gap-10">
+					<div id="menu-icon" class="cursor-pointer p-2 hover:text-[#FFDF3B]">
+						<i data-lucide="menu"></i>
+					</div>
+					<a href="#" class="text-[#FFDF3B] uppercase font-bold">Cassino</a>
+					<a href="#" class="uppercase hover:text-[#FFDF3B]">Ao vivo</a>
+				</div>
+				<div class="flex items-center gap-5">
+					<input type="text" name="" id=""
+						class="bg-transparent border border-white rounded-full px-5 py-1"
+						placeholder="Procurar jogos" />
+					<div class="flex gap-5 hidden" id="deslogado">
+						<a href="#"
+							class="text-[#FFDF3B] hover:border hover:border-[#FFDF3B] border border-transparent py-1 rounded px-3 uppercase cursor-pointer"
+							id="createAccount">Cadastrar</a>
+						<a href="#"
+							class="w-full flex justify-center items-center py-1 px-3 text-black bg-[#FFDF3B] uppercase font-bold rounded hover:bg-[#DDBA08]"
+							id="login">Acessar</a>
+					</div>
+					<div class="relative inline-block" id="logado">
+						<a id="userOptions" class="bg-[#232931] flex items-center gap-2 pr-3 border border-[#FFDF3B] rounded-xl rounded-t-xl font-medium text-[#FFDF3B] text-xl cursor-pointer">
+							<div class="bg-[#FFDF3B] p-2 rounded-lg rounded-t-lg">
+								<i data-lucide="circle-user-round" class="text-black"></i>
+							</div>
+							R$ 15.000,00
+						</a>
+						<div id="dropdownUser" class="absolute bg-white py-5 px-6 text-black rounded-b-xl">
+							<ul class="flex flex-col gap-3">
+								<li class="flex gap-3 text-sm cursor-pointer hover:text-gray-400"><i data-lucide="user" class="text-black"></i>Editar Perfil</li>
+								<li class="flex gap-3 text-sm cursor-pointer hover:text-gray-400"><i data-lucide="scroll-text" class="text-black"></i>Transições</li>
+								<li class="flex gap-3 text-sm cursor-pointer hover:text-gray-400"><i data-lucide="piggy-bank" class="text-black"></i>Depósito</li>
+								<li class="flex gap-3 text-sm cursor-pointer hover:text-gray-400"><i data-lucide="dollar-sign" class="text-black"></i>Sacar</li>
+								<li class="flex gap-3 text-sm cursor-pointer hover:text-gray-400"><i data-lucide="settings" class="text-black"></i>Configurações</li>
+								<li class="flex gap-3 text-sm cursor-pointer hover:text-gray-400" id="logout"><i data-lucide="log-out" class="text-black"></i>Sair</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div id="loginModal" class="hidden fixed left-0 top-0 w-full h-full overflow-auto bg-[#00000099]">
+					<div id="loginModalArea" class="flex justify-center items-center h-full">
+						<div
+							class="bg-[#223246] w-fit h-fit flex flex-col justify-between items-center gap-14 py-16 px-20 rounded-lg">
+							<img src="./logo.svg" class="w-72">
+							<div class="flex flex-col gap-5 w-full">
+								<span class="font-semibold text-3xl text-center">Acesse sua conta</span>
+								<div class="flex flex-col gap-3">
+									<input type="text" placeholder="Email"
+										class="bg-[#323F4F] rounded py-2 px-3 focus:outline-none placeholder:text-white">
+									<div class="flex flex-col gap-1 items-end">
+										<input type="text" placeholder="Senha"
+											class="bg-[#323F4F] rounded py-2 px-3 focus:outline-none w-full placeholder:text-white">
+										<a href="#" class="hover:text-[#FFDF3B]">Esqueceu a senha?</a>
+									</div>
+								</div>
+								<a href=""
+									class="w-full flex justify-center items-center py-1 px-3 text-black bg-[#FFDF3B] uppercase font-bold rounded hover:bg-[#DDBA08]">Acessar</a>
+							</div>
+							<span>Não tem uma conta?
+								<a href="#" class="text-[#FFDF3B] hover:text-[#DDBA08]" id="registerSecondButton">
+									Crie uma agora!
+								</a href="#"></span>
+						</div>
+					</div>
+				</div>
+				<div id="registerModal"
+					class="hidden fixed left-0 top-0 w-full h-full overflow-auto bg-[#00000099]">
+					<div id="registerModalArea" class="flex justify-center items-center h-full">
+						<div
+							class="bg-[#223246] w-fit h-fit flex flex-col justify-between items-center gap-14 py-16 px-20 rounded-lg">
+							<img src="./logo.svg" class="w-72">
+							<div class="flex flex-col gap-5 w-full">
+								<span class="font-semibold text-3xl text-center">Criar conta</span>
+								<div class="flex flex-col gap-3">
+									<input type="text" placeholder="Usuário"
+										class="bg-[#323F4F] rounded py-2 px-3 focus:outline-none placeholder:text-white">
+									<input type="text" placeholder="Email"
+										class="bg-[#323F4F] rounded py-2 px-3 focus:outline-none placeholder:text-white">
+									<input type="text" placeholder="Número de telefone"
+										class="bg-[#323F4F] rounded py-2 px-3 focus:outline-none placeholder:text-white">
+									<input type="text" placeholder="Senha"
+										class="bg-[#323F4F] rounded py-2 px-3 focus:outline-none placeholder:text-white">
+									<div class="flex gap-3 p-2">
+										<input type="checkbox" name="" id="verify">
+										<label class="leading-tight" for="verify">
+											Eu confirmo que tenho mais que 18 anos e<br />
+											aceito os termos de serviço da ZL | Games
+										</label>
+									</div>
+								</div>
+								<a href=""
+									class="w-full flex justify-center items-center py-1 px-3 text-black bg-[#FFDF3B] uppercase font-bold rounded hover:bg-[#DDBA08]">Cadastrar</a>
+							</div>
+							<span>
+								Já tem uma conta?
+								<a href="#" class="text-[#FFDF3B] hover:text-[#DDBA08]" id="loginSecondButton">
+									Acesse aqui!
+								</a href="#">
+							</span>
+						</div>
+					</div>
+				</div>
+			</header>
+			<img class="w-full" src="./banner.png" alt="Banner" class="rounded" />
+			<div class="flex flex-col gap-10">
+				<div class="flex flex-col gap-5">
+					<div class="flex justify-between">
+						<div class="flex items-center gap-5">
+							<span class="font-bold text-2xl">Novos jogos</span>
+							<div id="chevron-left" class="cursor-pointer p-2">
+								<i data-lucide="chevron-left"></i>
+							</div>
+							<div id="chevron-right" class="cursor-pointer p-2">
+								<i data-lucide="chevron-right"></i>
+							</div>
+						</div>
+						<a href="#">Ver mais</a>
+					</div>
+					<div class="flex gap-5 overflow-auto ">
+						<div class="flex flex-col items-start gap-2">
+							<img src="./game.png" alt="" class="h-full" />
+							<span>
+								Crazy Monkey
+							</span>
+						</div>
+						<div class="flex flex-col items-start gap-2">
+							<img src="./game.png" alt="" class="h-full" />
+							<span>
+								Crazy Monkey
+							</span>
+						</div>
+						<div class="flex flex-col items-start gap-2">
+							<img src="./game.png" alt="" class="h-full" />
+							<span>
+								Crazy Monkey
+							</span>
+						</div>
+						<div class="flex flex-col items-start gap-2">
+							<img src="./game.png" alt="" class="h-full" />
+							<span>
+								Crazy Monkey
+							</span>
+						</div>
+						<div class="flex flex-col items-start gap-2">
+							<img src="./game.png" alt="" class="h-full" />
+							<span>
+								Crazy Monkey
+							</span>
+						</div>
+						<div class="flex flex-col items-start gap-2">
+							<img src="./game.png" alt="" class="h-full" />
+							<span>
+								Crazy Monkey
+							</span>
+						</div>
+						<div class="flex flex-col items-start gap-2">
+							<img src="./game.png" alt="" class="h-full" />
+							<span>
+								Crazy Monkey
+							</span>
+						</div>
+						<div class="flex flex-col items-start gap-2">
+							<img src="./game.png" alt="" class="h-full" />
+							<span>
+								Crazy Monkey
+							</span>
+						</div>
+						<div class="flex flex-col items-start gap-2">
+							<img src="./game.png" alt="" class="h-full" />
+							<span>
+								Crazy Monkey
+							</span>
+						</div>
+					</div>
+				</div> 
+			</div>
+			<!-- teste -->
+				<div id="app" class="w-full transition-all duration-500 ease-linear">
+					<div class="flex justify-between">
+						<div class="flex items-center gap-5">
+							<span class="font-bold text-2xl">Novos jogos</span>
+							<div id="chevron-left" class="cursor-pointer p-2">
+								<i data-lucide="chevron-left"></i>
+							</div>
+							<div id="chevron-right" class="cursor-pointer p-2">
+								<i data-lucide="chevron-right"></i>
+							</div>
+						</div>
+						<a href="#">Ver mais</a>
+					</div>
+					<div class="relative">
+						<div class="slides-container h-72 flex snap-x snap-mandatory overflow-hidden overflow-x-auto gap-5 rounded scroll-smooth before:w-[45vw] before:shrink-0 after:w-[45vw] after:shrink-0 md:before:w-0 md:after:w-0">
+							<div class="max-w-[150px] max-h[287px] slide aspect-square h-full flex-shrink-0 snap-center rounded overflow-hidden rounded flex flex-col items-start gap-2">
+								<img class="max-w[150px] max-h[230px] object-cover rounded" src="./game.png">
+								<p>Crazy Monkey</p>
+							</div>
+							<div class="max-w-[150px] max-h[287px] slide aspect-square h-full flex-shrink-0 snap-center rounded overflow-hidden flex flex-col items-start gap-2">
+								<img class="max-w[150px] max-h[230px] object-cover" src="./game.png">
+								<p>Crazy Monkey</p>
+							</div>
+							<div class="max-w-[150px] max-h[287px] slide aspect-square h-full flex-shrink-0 snap-center rounded overflow-hidden flex flex-col items-start gap-2">
+								<img class="max-w[150px] max-h[230px] object-cover" src="./game.png">
+								<p>Crazy Monkey</p>
+							</div>
+							<div class="max-w-[150px] max-h[287px] slide aspect-square h-full flex-shrink-0 snap-center rounded overflow-hidden flex flex-col items-start gap-2">
+								<img class="max-w[150px] max-h[230px] object-cover" src="./game.png">
+								<p>Crazy Monkey</p>
+							</div>
+							<div class="max-w-[150px] max-h[287px] slide aspect-square h-full flex-shrink-0 snap-center rounded overflow-hidden flex flex-col items-start gap-2">
+								<img class="max-w[150px] max-h[230px] object-cover" src="./game.png">
+								<p>Crazy Monkey</p>
+							</div>
+							<div class="max-w-[150px] max-h[287px] slide aspect-square h-full flex-shrink-0 snap-center rounded overflow-hidden flex flex-col items-start gap-2">
+								<img class="max-w[150px] max-h[230px] object-cover" src="./game.png">
+								<p>Crazy Monkey</p>
+							</div>
+							<div class="max-w-[150px] max-h[287px] slide aspect-square h-full flex-shrink-0 snap-center rounded overflow-hidden flex flex-col items-start gap-2">
+								<img class="max-w[150px] max-h[230px] object-cover" src="./game.png">
+								<p>Crazy Monkey</p>
+							</div>
+							<div class="max-w-[150px] max-h[287px] slide aspect-square h-full flex-shrink-0 snap-center rounded overflow-hidden flex flex-col items-start gap-2">
+								<img class="max-w[150px] max-h[230px] object-cover" src="./game.png">
+								<p>Crazy Monkey</p>
+							</div>
+							<div class="max-w-[150px] max-h[287px] slide aspect-square h-full flex-shrink-0 snap-center rounded overflow-hidden flex flex-col items-start gap-2">
+								<img class="max-w[150px] max-h[230px] object-cover" src="./game.png">
+								<p>Crazy Monkey</p>
+							</div>
+							<div class="max-w-[150px] max-h[287px] slide aspect-square h-full flex-shrink-0 snap-center rounded overflow-hidden flex flex-col items-start gap-2">
+								<img class="max-w[150px] max-h[230px] object-cover" src="./game.png">
+								<p>Crazy Monkey</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			<!-- teste -->
+			<div class="flex flex-col gap-5">
+				<div class="flex justify-between">
+					<div class="flex items-center gap-5">
+						<span class="font-bold text-2xl">Populares</span>
+						<div id="chevron-left" class="cursor-pointer p-2">
+							<i data-lucide="chevron-left"></i>
+						</div>
+						<div id="chevron-right" class="cursor-pointer p-2">
+							<i data-lucide="chevron-right"></i>
+						</div>
+					</div>
+					<a href="#">Ver mais</a>
+				</div>
+				<div class="flex gap-5 overflow-auto">
+					<div class="flex flex-col items-start gap-2">
+						<img src="./game.png" alt="" class="h-full" />
+						<span>
+							Crazy Monkey
+						</span>
+					</div>
+					<div class="flex flex-col items-start gap-2">
+						<img src="./game.png" alt="" class="h-full" />
+						<span>
+							Crazy Monkey
+						</span>
+					</div>
+					<div class="flex flex-col items-start gap-2">
+						<img src="./game.png" alt="" class="h-full" />
+						<span>
+							Crazy Monkey
+						</span>
+					</div>
+					<div class="flex flex-col items-start gap-2">
+						<img src="./game.png" alt="" class="h-full" />
+						<span>
+							Crazy Monkey
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<footer class="flex justify-between bg-[#1E2228] p-10">
+			<div class="flex flex-col items-start gap-5">
+				<img src="./logo-white.svg" alt="" class="h-12">
+				<p class="text-sm">
+					© 2023 por ZL | Games.<br />
+					Todos os direitos reservados.
+				</p>
+				<div class="flex items-center gap-2">
+					<img src="./18+.svg" alt="">
+					<p class="text-sm">
+						Proibido para menores de 18 anos.
+					</p>
+				</div>
+			</div>
+			<div class="flex gap-10">
+				<div class="flex flex-col gap-3">
+					<span>
+						Links úteis
+					</span>
+					<div class="flex flex-col gap-2">
+						<a href="#" class="hover:text-[#FFDF3B] cursor-pointer">
+							Termos de uso
+						</a>
+						<a href="#" class="hover:text-[#FFDF3B] cursor-pointer">
+							Política
+						</a>
+						<a href="#" class="hover:text-[#FFDF3B] cursor-pointer">
+							Suporte
+						</a>
+						<a href="#" class="hover:text-[#FFDF3B] cursor-pointer">
+							Afiliados
+						</a>
+					</div>
+				</div>
+				<div class="flex gap-5">
+					<a href="#" class="rounded-full p-2 hover:text-[#FFDF3B]">
+						<i data-lucide="instagram"></i>
+					</a>
+					<a href="#" class="rounded-full p-2 hover:text-[#FFDF3B]">
+						<i data-lucide="twitter"></i>
+					</a>
+					<a href="#" class="rounded-full p-2 hover:text-[#FFDF3B]">
+						<i data-lucide="youtube"></i>
+					</a>
+				</div>
+			</div>
+		</footer>
+	</main>
+
+	<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+	<script src="https://unpkg.com/lucide@latest"></script>
+	<script>
+		lucide.createIcons();
+
+		$(document).ready(function () {
+			$('#menu-icon').click(function () {
+				$('#sidebar').toggleClass('hidden');
+				$('#main-area').toggleClass('ml-[250px]');
+			});
+		});
+
+		const loginModal = document.getElementById("loginModal");
+		const bgLoginModal = document.getElementById("loginModalArea");
+		const loginButton = document.getElementById("login");
+		const registerModal = document.getElementById("registerModal");
+		const bgRegisterModal = document.getElementById("registerModalArea");
+		const registerButton = document.getElementById("createAccount");
+		const secondLoginButton = document.getElementById("loginSecondButton");
+		const secondRegisterButton = document.getElementById("registerSecondButton");
+
+		const userDropdown = document.getElementById("dropdownUser");
+		const userOptions = document.getElementById("userOptions");
+
+		const logout = document.getElementById("logout");
+		const logado = document.getElementById("logado");
+		const deslogado = document.getElementById("deslogado");
+
+		loginButton.onclick = function () {
+			loginModal.style.display = "block";
+		};
+
+		secondLoginButton.onclick = function () {
+			registerModal.style.display = "none";
+			loginModal.style.display = "block";
+		}
+
+		secondRegisterButton.onclick = function () {
+			loginModal.style.display = "none";
+			registerModal.style.display = "block";
+		}
+
+		registerButton.onclick = function () {
+			registerModal.style.display = "block";
+		};
+
+		userOptions.onclick = function () {
+			if (userDropdown.style.display == "block") {
+				userDropdown.style.display = "none";
+
+			} else {
+				userDropdown.style.display = "block";
+				logado.classList.remove('rounded-xl');
+				
+			}
+		};
+
+		logout.onclick = function () {
+			logado.style.display = "none";
+			deslogado.style.display = "flex";
+		}
+
+		window.onclick = function (event) {
+			if (event.target == bgLoginModal) {
+				loginModal.style.display = "none";
+			} else if (event.target == bgRegisterModal) {
+				registerModal.style.display = "none";
+			};
+
+			if (event.target != userDropdown) {
+				if (event.target != userOptions) {
+					userDropdown.style.display = "none";
+				}
+			}
+		};
+	</script>
+	
+</body>
+
+</html>
